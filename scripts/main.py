@@ -1,4 +1,4 @@
-from helpers import run_command, create_file, GO_MAIN_FILE
+from scripts.helpers import run_command, create_file, GO_MAIN_FILE
 import os
 
 
@@ -11,20 +11,19 @@ def django_project(path ,name):
 
 
 def react_project(path, name):
-    os.mkdir(path)
     os.chdir(path)
+    name = name.replace(" ", "_").lower()
     commands = [f'npx create-react-app {name}', 'npm start']
-    for command in commands:
-        run_command(command)
+    run_command(commands[0])
+    os.chdir(f"{path}/{name}")
+    for i in range(1, len(commands)):
+        run_command(commands[i])
 
 
-path = input("Where do you want you project to live: ") 
-projectName = input("How do you wanna call your project: ")
+
 dirs = ["handlers", "types", "store", "middleware", "routes"]
 
-
 def go_project(path, name):
-    os.mkdir(path)
     os.chdir(path)
 
     middlewareFiles = ["jwt.go", "authentication.go"]
