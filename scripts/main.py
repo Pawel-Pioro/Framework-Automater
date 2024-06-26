@@ -2,7 +2,7 @@ from scripts.helpers import run_command, create_file
 from scripts.snippets import GO_MAIN_SNIPPET, EXPRESS_SNIPPET
 import os
 DIRS = ["handlers", "types", "store", "middleware", "routes"]
-
+COMMON_FILES = [".gitignore", "README.md"]
 
 
 
@@ -10,7 +10,9 @@ class Project:
     def __init__(self, path, name) -> None:
         self.path = path 
         self.name = name
-
+        for file in COMMON_FILES:
+            with open(file, "w") as f:
+                f.write("")
     def django(self):
         command = "django-admin startproject "
         os.chdir(self.path)
