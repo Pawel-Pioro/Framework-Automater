@@ -23,11 +23,11 @@ status = tk.StringVar()
 def execute_command(framework, path, name):
     project = Project(path=path, name=name)
     if framework == "Django":
-        project.django_project(path, name)
+        project.django()
     elif framework == "React":
-        project.react_project(path, name)
+        project.react()
     elif framework == "GO":
-        project.go_project(path, name)
+        project.go()
 
 def browse_folder():
     folder_selected = filedialog.askdirectory()

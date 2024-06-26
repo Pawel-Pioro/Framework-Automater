@@ -1,22 +1,23 @@
-from scripts.helpers import run_command, create_file, GO_MAIN_FILE
+from scripts.helpers import run_command, create_file
+from scripts.snippets import GO_MAIN_SNIPPET, EXPRESS_SNIPPET
 import os
-
-
 DIRS = ["handlers", "types", "store", "middleware", "routes"]
+
+
 
 
 class Project:
     def __init__(self, path, name) -> None:
         self.path = path 
-        self.name = name 
+        self.name = name
 
-    def django_project(self):
+    def django(self):
         command = "django-admin startproject "
         os.chdir(self.path)
         run_command(command + self.name)
 
 
-    def react_project(self):
+    def react(self):
         os.chdir(self.path)
         name = self.name.replace(" ", "_").lower()
         commands = [f'npx create-react-app {name} -y', 'npm start']
@@ -26,7 +27,18 @@ class Project:
             run_command(command)
 
 
-    def go_project(self):
+    def express(self):
+        init_command = "npm init -y"
+        install_express = "npm install express"
+        os.chdir(self.path)
+        run_command(init_command)
+        run_command(install_express)
+        with open("app.js", "w") as f:
+            f.write(EXPRESS_SNIPPET)
+        for dir in DIRS:
+            os.mkdir(dir)
+
+    def go(self):
         os.chdir(self.path)
 
         middlewareFiles = ["jwt.go", "authentication.go"]
@@ -36,7 +48,7 @@ class Project:
         run_command(command)
         create_file("main.go")
         with open("main.go", "w") as f:
-            f.write(GO_MAIN_FILE)
+            f.write(GO_MAIN_SNIPPET)
             os.mkdir(f"{self.path}/pkg")
             os.chdir(f"{self.path}/pkg")
             for dir in DIRS:
@@ -49,6 +61,7 @@ class Project:
                             f.write("package middleware")
                     os.chdir(f"{self.path}/pkg")
 
+    
 
 
 
