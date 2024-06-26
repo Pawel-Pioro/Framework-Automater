@@ -12,12 +12,14 @@ root = tk.Tk()
 root.title("Framework Automater")
 
 # variables
-FRAMEWORK_OPTIONS = ["Django", "React", "GO"]
+FRAMEWORK_OPTIONS = ["Django", "React", "GO", "Express"]
 folder_path = tk.StringVar()
 selected_framework = tk.StringVar()
 project_name = tk.StringVar()
 error = tk.StringVar()
 status = tk.StringVar()
+
+status.set("Create Project")
 
 # functions
 def execute_command(framework, path, name):
@@ -28,6 +30,8 @@ def execute_command(framework, path, name):
         project.react()
     elif framework == "GO":
         project.go()
+    elif framework == "Express":
+        project.express()
 
 def browse_folder():
     folder_selected = filedialog.askdirectory()

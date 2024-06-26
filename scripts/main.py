@@ -30,9 +30,12 @@ class Project:
 
 
     def express(self):
+        os.chdir(self.path)
+        name = self.name.replace(" ", "_").lower()
+        os.mkdir(name)
+        os.chdir(name)
         init_command = "npm init -y"
         install_express = "npm install express"
-        os.chdir(self.path)
         run_command(init_command)
         run_command(install_express)
         with open("app.js", "w") as f:
