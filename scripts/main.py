@@ -13,11 +13,11 @@ def django_project(path ,name):
 def react_project(path, name):
     os.chdir(path)
     name = name.replace(" ", "_").lower()
-    commands = [f'npx create-react-app {name}', 'npm start']
+    commands = [f'npx create-react-app {name} -y', 'npm start']
     run_command(commands[0])
     os.chdir(f"{path}/{name}")
-    for i in range(1, len(commands)):
-        run_command(commands[i])
+    for command in commands:
+        run_command(command)
 
 
 
@@ -25,7 +25,7 @@ dirs = ["handlers", "types", "store", "middleware", "routes"]
 
 def go_project(path, name):
     os.chdir(path)
-
+     
     middlewareFiles = ["jwt.go", "authentication.go"]
 
 
