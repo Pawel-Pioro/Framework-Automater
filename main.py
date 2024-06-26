@@ -5,7 +5,7 @@ from tkinter import filedialog
 from tkinter import font as tkfont
 from tkinter import ttk
 
-from scripts.main import django_project, react_project, go_project
+from scripts.main import Project
 
 # setup
 root = tk.Tk()
@@ -21,12 +21,13 @@ status = tk.StringVar()
 
 # functions
 def execute_command(framework, path, name):
+    project = Project(path=path, name=name)
     if framework == "Django":
-        django_project(path, name)
+        project.django_project(path, name)
     elif framework == "React":
-        react_project(path, name)
+        project.react_project(path, name)
     elif framework == "GO":
-        go_project(path, name)
+        project.go_project(path, name)
 
 def browse_folder():
     folder_selected = filedialog.askdirectory()
